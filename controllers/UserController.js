@@ -1,92 +1,28 @@
-const models = require("../models");
-const User = models.User;
-const { sequelize } = require("../models");
+const jwt = require("jsonwebtoken");
+const { showAll, create, findOneData } = require("../services");
+const { userLogin } = require("../services/user.services");
 
-const show = async (req, res) => {
-  const allData = await User.findAll();
-  res.json({ allData });
+const self = {};
+const modelName = "user";
+
+self.show = async (req, res) => {
+  const allData = await showAll(modelName);
+  res.status(200);
 };
 
-// const showAll = async (req, res) => {
-//   const allData = await User.findAll({
-//     include: [
-//       {
-//         model: models.transactions,
-//       },
-//     ],
-//   });
-//   res.json({ allData });
-// };
+self.signup = async (req, res) => {
+  const allData = await create(modelName, req.body);
+  res.status(200);
+};
 
-// const showUser = async (req, res) => {
-//   const id = req.params.id;
-//   const allData = await User.findByPk(id);
-//   res.json({ allData });
-// };
+self.login = async (req, res) => {
+  const allData = await findOneData(modelName, req.body);
+  if (allData) {
+    const data = allData?.dataValues;
+    const token = jwt.sign(data, process.env.JWT_KEY);
+    res.status(200).send(token);
+  }
+  res.status(400).send("Invalid credential");
+};
 
-// const addUser = async (req, res) => {
-//   const data = req.body;
-//   if (Array.isArray(data)) {
-//     const allData = await User.bulkCreate(data);
-//     res.json({ allData });
-//   } else {
-//     const allData = await User.create(data);
-//     res.json({ allData });
-//   }
-// };
-
-// const addAll = async (req, res) => {
-//   const data = req.body;
-//   // if (Array.isArray(data)) {
-//   const allData = await User.create(data, {
-//     include: [
-//       {
-//         model: models.transactions,
-//       },
-//     ],
-//   });
-//   res.json({ allData });
-// };
-
-// const patchUser = async (req, res) => {
-//   const id = req.params.id;
-//   const updatedData = User.update(req.body, {
-//     where: {
-//       id: id,
-//     },
-//   });
-//   res.json({ updatedData });
-// };
-
-// const patchAll = async (req, res) => {
-//   const id = req.params.id;
-
-//   try {
-//     await sequelize.transaction(async (transaction) => {
-//       const updatedData = User.update(
-//         req.body,
-//         {
-//           where: {
-//             id: id,
-//           },
-//         },
-//         { transaction }
-//       );
-//       const updatedData2 = models.transactions.update(
-//         req.body.transactions,
-//         {
-//           where: {
-//             user_id: id,
-//           },
-//         },
-//         { transaction }
-//       );
-//       res.json({ updatedData, updatedData2 });
-//     });
-//   } catch (err) {
-//     // res.json({ updatedData: "ERROR" + err });
-//     console.log(err);
-//   }
-// };
-
-module.exports = { show };
+module.exports = self;

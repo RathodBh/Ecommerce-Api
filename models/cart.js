@@ -20,11 +20,11 @@ module.exports = (sequelize, DataTypes) => {
   cart.init(
     {
       user_id: DataTypes.INTEGER,
-      
     },
     {
       sequelize,
       modelName: "cart",
+      freezeTableName: true,
     }
   );
   return cart;

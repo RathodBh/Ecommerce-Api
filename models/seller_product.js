@@ -13,12 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       
     }
   }
-  seller_product.init({
-    seller_id: DataTypes.INTEGER,
-    prod_id: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'seller_product',
-  });
+  seller_product.init(
+    {
+      seller_id: DataTypes.INTEGER,
+      prod_id: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "seller_product",
+      freezeTableName: true,
+    }
+  );
   return seller_product;
 };

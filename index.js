@@ -7,7 +7,7 @@ const router = require("./routes")
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
-app.use("/", router);
+app.use("/apis/", router);
 
 app.listen(process.env.PORT,()=>{
     console.log(`Server is running ${process.env.URL}`)

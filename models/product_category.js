@@ -13,12 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  product_category.init({
-    prod_id: DataTypes.INTEGER,
-    cat_id: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'product_category',
-  });
+  product_category.init(
+    {
+      prod_id: DataTypes.INTEGER,
+      cat_id: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "product_category",
+      freezeTableName: true,
+    }
+  );
   return product_category;
 };

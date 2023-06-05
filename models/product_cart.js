@@ -13,13 +13,17 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  product_cart.init({
-    cart_id: DataTypes.INTEGER,
-    prod_id: DataTypes.INTEGER,
-    quantity: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'product_cart',
-  });
+  product_cart.init(
+    {
+      cart_id: DataTypes.INTEGER,
+      prod_id: DataTypes.INTEGER,
+      quantity: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "product_cart",
+      freezeTableName: true,
+    }
+  );
   return product_cart;
 };
