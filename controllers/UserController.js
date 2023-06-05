@@ -1,7 +1,6 @@
 const models = require("../models");
 const User = models.User;
 const { sequelize } = require("../models");
-console.log("🚀 ~ file: UserController.js:7 ~ show ~ User:", User);
 
 const show = async (req, res) => {
   const allData = await User.findAll();
