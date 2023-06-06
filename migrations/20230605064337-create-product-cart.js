@@ -27,6 +27,7 @@ module.exports = {
       },
       quantity: {
         type: Sequelize.INTEGER,
+        defaultValue: 1,
       },
       createdAt: {
         allowNull: false,

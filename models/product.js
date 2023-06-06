@@ -5,14 +5,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       product.belongsToMany(models.cart, {
         through: "product_cart",
+        foreignKey: "prod_id",
       });
 
       product.belongsToMany(models.category, {
         through: "product_category",
+        foreignKey: "prod_id",
       });
 
       product.belongsToMany(models.seller, {
         through: "seller_product",
+        foreignKey: "prod_id",
       });
     }
   }

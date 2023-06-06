@@ -23,6 +23,16 @@ module.exports = {
         img_url:
           "https://m.media-amazon.com/images/I/31DaY6l18YL._SY445_SX342_QL70_FMwebp_.jpg",
       },
+      {
+        name: "Black T-Shirt, Men Color Block Round Neck Cotton Blend Blue",
+        description:
+          "Good T-shirt in low budget buy now, Men Color Block Round Neck Cotton Blend Blue",
+        brand_name: "AUSK",
+        price: "219",
+        cross_price: "1499",
+        img_url:
+          "https://rukminim1.flixcart.com/image/612/612/xif0q/t-shirt/r/v/k/m-ausk0165-ausk-original-imaghu9fbhcgf2za.jpeg?q=70",
+      },
     ]);
   },
 

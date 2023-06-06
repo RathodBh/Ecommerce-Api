@@ -11,4 +11,5 @@ self.userLogin = async (modelName, data) => {
   }
 };
 
+
 module.exports = self;
