@@ -36,11 +36,26 @@ self.findOneData = async (modelName, data) => {
   }
 };
 
-self.create = async (modelName, data) => {
+self.createData = async (modelName, data) => {
   const myModal = models[modelName];
 
   try {
     const allData = await myModal.create(data);
+    return allData;
+  } catch (err) {
+    console.log("err", err);
+    return err;
+  }
+};
+
+self.deleteData = async (modelName, condition) => {
+  const myModal = models[modelName];
+
+  try {
+    const allData = await myModal.destroy({
+      where: condition,
+    });
+
     return allData;
   } catch (err) {
     console.log("err", err);

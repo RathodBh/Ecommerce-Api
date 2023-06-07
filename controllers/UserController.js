@@ -19,8 +19,7 @@ self.login = async (req, res) => {
   const allData = await findOneData(modelName, req.body);
   if (allData) {
     const { password, ...rest } = allData?.dataValues;
-    console.log("rest", rest);
-    const token = jwt.sign(rest, process.env.JWT_KEY, { expiresIn: "1h" });
+    const token = jwt.sign(rest, process.env.JWT_KEY);
     return res.status(200).send(token);
   }
   return res.status(400).send("Invalid credential");
