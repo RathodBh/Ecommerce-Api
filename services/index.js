@@ -63,4 +63,19 @@ self.deleteData = async (modelName, condition) => {
   }
 };
 
+self.updateData = async (modelName, id, body) => {
+  const myModal = models[modelName];
+
+  try {
+    const allData = await myModal.update(body, {
+      where: { id },
+    });
+
+    return allData;
+  } catch (err) {
+    console.log("err", err);
+    return err;
+  }
+};
+
 module.exports = self;

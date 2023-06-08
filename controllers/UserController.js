@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { showAll, create, findOneData } = require("../services");
-const { userLogin } = require("../services/user.service");
+const { showAll, createData, findOneData, updateData } = require("../services");
 
 const self = {};
 const modelName = "user";
@@ -11,7 +10,7 @@ self.show = async (req, res) => {
 };
 
 self.signup = async (req, res) => {
-  const allData = await create(modelName, req.body);
+  const allData = await createData(modelName, req.body);
   return res.status(200).send("Signup successfully");
 };
 
@@ -28,6 +27,31 @@ self.login = async (req, res) => {
 self.data = async (req, res) => {
   if (req.user) return res.status(200).send(req.user);
   else return res.status(401).send("Invalid data");
+};
+
+self.address = async (req, res) => {
+  const allData = await showAll("address");
+  console.log(
+    "🚀 ~ file: UserController.js:35 ~ self.address= ~ allData:",
+    allData
+  );
+  return res.status(200).send(allData);
+};
+
+self.addAddress = async (req, res) => {
+  const allData = await createData("address", {
+    ...req.body,
+    user_id: req.user.id,
+  });
+  return res.status(200).send(allData);
+};
+
+self.editAddress = async (req, res) => {
+  const allData = await updateData("address", req.params.id, {
+    ...req.body,
+    user_id: req.user.id,
+  });
+  return res.status(200).send(allData);
 };
 
 module.exports = self;

@@ -9,5 +9,8 @@ router.get("/", UserController.show);
 router.post("/signup", signupValidation, UserController.signup);
 router.post("/login", loginValidation, UserController.login);
 router.get("/data", authJwtMiddleware, UserController.data);
+router.get("/address", authJwtMiddleware, UserController.address);
+router.post("/address/add", authJwtMiddleware, UserController.addAddress);
+router.patch("/address/edit/:id", authJwtMiddleware, UserController.editAddress);
 
 module.exports = router;

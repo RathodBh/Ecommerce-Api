@@ -1,4 +1,4 @@
-const { createData, deleteData } = require("../services");
+const { createData, deleteData, updateData } = require("../services");
 const { CartData, GetCartID, CartDataID } = require("../services/cart.service");
 
 const self = {};
@@ -26,7 +26,14 @@ self.addItem = async (req, res) => {
 self.delItem = async (req, res) => {
   const allData = await deleteData("product_cart", req.query);
   return res.status(200).send({
-    prod_id: req.query.prod_id
+    prod_id: req.query.prod_id,
+  });
+};
+
+self.updateQuantity = async (req, res) => {
+  const allData = await updateData("product_cart", req.params.id, req.body);
+  return res.status(200).send({
+    prod_id: req.query.prod_id,
   });
 };
 

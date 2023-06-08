@@ -3,13 +3,27 @@ const models = require("../models");
 const self = {};
 const modelName = models.product;
 const category = models.category;
+const cart = models.cart;
 
 self.ProductWithCat = async () => {
   try {
     const allData = await modelName.findAll({
-      include: [{
-        model: category
-      }],
+      include: [
+        {
+          model: category,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: cart,
+          attributes: ["id"],
+          through: {
+            attributes: ["id", "quantity"],
+          },
+        },
+      ],
     });
     return allData;
   } catch (err) {
@@ -17,7 +31,5 @@ self.ProductWithCat = async () => {
     return err;
   }
 };
-
-
 
 module.exports = self;
