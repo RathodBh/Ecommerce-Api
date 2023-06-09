@@ -36,11 +36,33 @@ self.findOneData = async (modelName, data) => {
   }
 };
 
+self.findAllData = async (modelName, condition) => {
+  const myModal = models[modelName];
+  try {
+    const allData = await myModal.findAll({ where: condition });
+    return allData;
+  } catch (err) {
+    console.log("err", err);
+    return err;
+  }
+};
+
 self.createData = async (modelName, data) => {
   const myModal = models[modelName];
 
   try {
     const allData = await myModal.create(data);
+    return allData;
+  } catch (err) {
+    console.log("err", err);
+    return err;
+  }
+};
+
+self.bulkCreateData = async (modelName, data) => {
+  const myModal = models[modelName];
+  try {
+    const allData = await myModal.bulkCreate(data);
     return allData;
   } catch (err) {
     console.log("err", err);

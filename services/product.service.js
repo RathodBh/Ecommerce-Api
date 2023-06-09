@@ -4,6 +4,7 @@ const self = {};
 const modelName = models.product;
 const category = models.category;
 const cart = models.cart;
+const order = models.order;
 
 self.ProductWithCat = async () => {
   try {
@@ -23,6 +24,7 @@ self.ProductWithCat = async () => {
             attributes: ["id", "quantity"],
           },
         },
+        "order_details",
       ],
     });
     return allData;

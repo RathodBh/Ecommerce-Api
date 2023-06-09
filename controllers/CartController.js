@@ -30,6 +30,13 @@ self.delItem = async (req, res) => {
   });
 };
 
+self.delAll = async (req, res) => {
+  const allData = await deleteData("product_cart", req.query);
+  return res.status(200).send({
+    cart_id: req.query.cart_id,
+  });
+};
+
 self.updateQuantity = async (req, res) => {
   const allData = await updateData("product_cart", req.params.id, req.body);
   return res.status(200).send({

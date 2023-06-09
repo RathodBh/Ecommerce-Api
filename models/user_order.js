@@ -23,8 +23,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   user_order.init(
     {
-      userId: DataTypes.INTEGER,
-      add_id: DataTypes.INTEGER
+      user_id: DataTypes.INTEGER,
+      add_id: DataTypes.INTEGER,
+      total: DataTypes.INTEGER,
     },
     {
       sequelize,
