@@ -33,20 +33,16 @@ self.addOrder = async (req, res) => {
 
   return res.status(200).send(user_order_result);
 };
-self.lastOrder = async (req, res) => {
+
+
+self.allOrders = async (req, res) => {
   const user_id = req.user.id;
-  const userOrder = await findAllData("user_order", { user_id });
-  const userOrderResult = userOrder[userOrder.length - 1];
-  const orderAddress = await findAllData("address", {
-    id: userOrderResult.add_id,
-  });
-
-  const allOrderResult = await findAllData("order", {
-    user_order_id: parseInt(userOrderResult.id),
-  });
-
-  return res
-    .status(200)
-    .send({ products: allOrderResult, address: orderAddress });
+  const userOrder = await findAllData(
+    "user_order",
+    { user_id },
+    { include: ["orders", "addresses"] }
+  );
+  return res.status(200).send({ userOrder });
 };
+
 module.exports = self;

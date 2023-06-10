@@ -25,6 +25,7 @@ self.ProductWithCat = async () => {
           },
         },
         "order_details",
+        "seller_details"
       ],
     });
     return allData;

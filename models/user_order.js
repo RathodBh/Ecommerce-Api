@@ -14,10 +14,12 @@ module.exports = (sequelize, DataTypes) => {
 
       user_order.hasMany(models.order, {
         foreignKey: "user_order_id",
+        as:"orders"
       });
 
       user_order.belongsTo(models.address, {
         foreignKey: "add_id",
+        as:"addresses"
       });
     }
   }

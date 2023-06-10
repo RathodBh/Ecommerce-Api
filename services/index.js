@@ -25,21 +25,24 @@ self.getSingleItem = async (modelName, id) => {
   }
 };
 
-self.findOneData = async (modelName, data) => {
+self.findOneData = async (modelName, data, includeData = {}) => {
   const myModal = models[modelName];
 
   try {
-    return await myModal.findOne({ where: data });
+    return await myModal.findOne({ ...includeData, where: data });
   } catch (err) {
     console.log("err", err);
     return err;
   }
 };
 
-self.findAllData = async (modelName, condition) => {
+self.findAllData = async (modelName, condition, includeData = {}) => {
   const myModal = models[modelName];
   try {
-    const allData = await myModal.findAll({ where: condition });
+    const allData = await myModal.findAll({
+      ...includeData,
+      where: condition,
+    });
     return allData;
   } catch (err) {
     console.log("err", err);
