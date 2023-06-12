@@ -1,11 +1,12 @@
 const models = require("../models");
-const myModal = models.cart;
+const Cart = models.cart;
+const Product_cart = models.product_cart;
 
 const self = {};
 
 self.CartData = async (id, onlyID = false) => {
   try {
-    const allData = await myModal.findAll({
+    const allData = await Cart.findAll({
       attributes: [],
       where: {
         user_id: id,
@@ -24,7 +25,7 @@ self.CartData = async (id, onlyID = false) => {
 
 self.CartDataID = async (id) => {
   try {
-    const allData = await myModal.findAll({
+    const allData = await Cart.findAll({
       attributes: [],
       where: {
         user_id: id,
@@ -44,10 +45,22 @@ self.CartDataID = async (id) => {
 
 self.GetCartID = async (id) => {
   try {
-    const allData = await myModal.findAll({
+    const allData = await Cart.findAll({
       where: {
         user_id: id,
       },
+    });
+    return allData;
+  } catch (err) {
+    console.log("err", err);
+    return err;
+  }
+};
+
+self.updateQuantity = async (condition, data) => {
+  try {
+    const allData = await Product_cart.update(data, {
+      where: condition,
     });
     return allData;
   } catch (err) {
